@@ -27,6 +27,7 @@ Bot.on('message', msg => {
                     msg.delete();
                 }, 5000);
             }
+            break;
 
         case 'liya':
             if (msg.author.username != 'JMBot') {
