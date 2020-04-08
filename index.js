@@ -3,6 +3,7 @@ const Bot = new Discord.Client();
 
 const token = 'Njk3MDgyMTk4MzYwMTk1MjAz.Xo1nLA.Z3RMpDVRnyMcBMpdsNOPYYBVSiI';
 const prefix = '!';
+var user_ids = [];
 
 Bot.on('ready', () => {
     console.log('Your Bot is online! Gago!');
@@ -16,28 +17,69 @@ Bot.on('message', msg => {
 
     switch (args[0]) {
         case 'bulig':
-            msg.reply('!sd --> Self destruct your message in 5 seconds. \nMoi bayot!');
+            msg.channel.send('!sd --> Self destruct your message in 5 seconds.' + 
+                            '!kirom @name --> Silences a user' + 
+                            '!unkirom @name --> Unsilences a user' + 
+                            '!limpyo --> Removes commands' + 
+                            '!limpyo "text" --> Removes commands and recent messages containing "text" (w/o double quotes)' + 
+                            '\nMoi bayot!'
+            );
             break;
 
         case 'sd':
             if (msg.author.username != 'JMBot') {
-                msg.reply('Your message will self-destruct in 5 seconds...');
+                msg.reply('@everyone Your message will self-destruct in 5 seconds...');
 
                 setTimeout(() => {
                     msg.delete();
                 }, 5000);
-            }
+            };
             break;
 
-        case 'liya':
+        case 'kirom':
             if (msg.author.username != 'JMBot') {
-                msg.reply('pakyu! yu kanat dipit may san!');
+                if (args[1] && msg.mentions.users.first().id) {
+                    if (!user_ids.includes(msg.mentions.users.first().id)) {
+                        user_ids.push(msg.mentions.users.first().id);
+                        msg.channel.send(args[1] + ' is kiromed! Maan!');
+                    };
+                };
+            };
+            break;
+        case 'unkirom':
+            if (msg.author.username != 'JMBot') {
+                var look_id = msg.mentions.users.first().id
+
+                if (args[1] && look_id) {
+                    if (user_ids.includes(look_id)) {
+                        user_ids = user_ids.filter(function(e) { return e !== look_id });
+                        msg.channel.send(args[1] + ' is unkiromed! press F');
+                    };
+                };
             }
+        case 'limpyo':
+            if (msg.author.username != 'JMBot') {
+                msg.channel.messages.fetch()
+                   .then(function(list) {
+                        const messagesToDelete = list.filter(msg => msg.content.includes('!'));
+
+                        msg.channel.bulkDelete(messagesToDelete).then(function() {
+                            if (args[1]) {
+                                const messagesToDelete = list.filter(msg => msg.content.includes(args[1]));
+                                msg.channel.bulkDelete(messagesToDelete).then(function() {
+                                    msg.channel.send("Hi everything, human na ko manlimpyo. mwah!");
+                                });
+                            };
+                        });
+                    }, function(err) {
+                        msg.channel.send("ERROR: ERROR CLEARING CHANNEL.");
+                    });
+            };
             break;
     }
 
     if(msg.author.username == 'JMBot') {
-        if ((msg.content).includes('Your message will self-destruct in 5 seconds')) {
+        if ((msg.content).includes('@everyone Your message will self-destruct in 5 seconds')) {
             let sec = 5;
 
             setTimeout(() => {
@@ -51,16 +93,14 @@ Bot.on('message', msg => {
                 let sec_lbl = 'seconds';
                 if (sec <= 1) { sec_lbl =  'second' }
 
-                msg.edit('Your message will self-destruct in ' + sec + ' ' + sec_lbl + '...')
+                msg.edit('@everyone Your message will self-destruct in ' + sec + ' ' + sec_lbl + '...')
             }, 1000);
         }
     }
 
-    // if(msg.author.id == '430745967998795777') {
-    //     msg.delete();
-    // }
-
-
-})
+    if (user_ids && user_ids.includes(msg.author.id)) {
+        msg.delete();
+    };
+});
 
 Bot.login(token);
