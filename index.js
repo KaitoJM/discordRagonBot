@@ -28,6 +28,12 @@ Bot.on('message', msg => {
                 }, 5000);
             }
             break;
+
+        case 'liya':
+            if (msg.author.username != 'JMBot') {
+                msg.reply('pakyu! yu kanat dipit may san!');
+            }
+            break;
     }
 
     if(msg.author.username == 'JMBot') {
