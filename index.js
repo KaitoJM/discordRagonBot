@@ -27,6 +27,11 @@ Bot.on('message', msg => {
                     msg.delete();
                 }, 5000);
             }
+
+        case 'liya':
+            if (msg.author.username != 'JMBot') {
+                msg.reply('pakyu! yu kanat dipit may san!');
+            }
             break;
     }
 
