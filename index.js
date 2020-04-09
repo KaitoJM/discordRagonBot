@@ -28,7 +28,7 @@ Bot.on('message', msg => {
 
         case 'sd':
             if (msg.author.username != 'JMBot') {
-                msg.reply('@everyone Your message will self-destruct in 5 seconds...');
+                msg.channel.send('@everyone Your message will self-destruct in 5 seconds...');
 
                 setTimeout(() => {
                     msg.delete();
