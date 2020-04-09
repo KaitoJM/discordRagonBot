@@ -13,7 +13,19 @@ var iras = [
     'gago!',
     'apotanginamo!',
     'guti utin!',
-    'bahu ka puday!'
+    'panu mo nasabi?',
+    'time out',
+    'i know how to handle my time',
+    'ho a record',
+    'wah! i dunt nu!',
+    'ksksksksks',
+    'em mama',
+    'do you really need that?',
+    'khwkhwkhwkh',
+    'die all',
+    'intindiha kasi anay an chat George',
+    'Diri kasi for improvement imu criticism honestly',
+    'waray bayag!'
 ];
 
 Bot.on('ready', () => {
