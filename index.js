@@ -22,6 +22,7 @@ var iras = [
     'em mama',
     'do you really need that?',
     'khwkhwkhwkh',
+    'padati dati kana liwat',
     'nulets',
     'no time for emotion fags',
     'jesas',
