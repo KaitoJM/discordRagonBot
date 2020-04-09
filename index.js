@@ -46,6 +46,7 @@ Bot.on('message', msg => {
                 };
             };
             break;
+
         case 'unkirom':
             if (msg.author.username != 'JMBot') {
                 var look_id = msg.mentions.users.first().id
@@ -61,6 +62,8 @@ Bot.on('message', msg => {
                     msg.channel.send('pakyu bladi!');
                 };
             };
+            break;
+
         case 'limpyo':
             if (msg.author.username != 'JMBot') {
                 msg.channel.messages.fetch()
@@ -71,8 +74,10 @@ Bot.on('message', msg => {
                             if (args[1]) {
                                 const messagesToDelete = list.filter(msg => msg.content.includes(args[1]));
                                 msg.channel.bulkDelete(messagesToDelete).then(function() {
-                                    msg.channel.send("Hi everything, human na ko manlimpyo. mwah!");
+                                    msg.channel.send("Hi everything! human na ko manlimpyo. mwah!");
                                 });
+                            } else {
+                                msg.channel.send("Hi everything! human na ko manlimpyo. mwah!");
                             };
                         });
                     }, function(err) {
@@ -82,7 +87,7 @@ Bot.on('message', msg => {
             break;
     };
 
-    if(msg.author.username == 'JMBot') {
+    if (msg.author.username == 'JMBot') {
         if ((msg.content).includes('@everyone Your message will self-destruct in 5 seconds')) {
             let sec = 5;
 
