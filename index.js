@@ -50,13 +50,17 @@ Bot.on('message', msg => {
             if (msg.author.username != 'JMBot') {
                 var look_id = msg.mentions.users.first().id
 
-                if (args[1] && look_id) {
-                    if (user_ids.includes(look_id)) {
-                        user_ids = user_ids.filter(function(e) { return e !== look_id });
-                        msg.channel.send(args[1] + ' is unkiromed! press F');
+                if (!save.includes(msg.author.id)) {
+                    if (args[1] && look_id) {
+                        if (user_ids.includes(look_id)) {
+                            user_ids = user_ids.filter(function(e) { return e !== look_id });
+                            msg.channel.send(args[1] + ' is unkiromed! press F');
+                        };
                     };
+                } else {
+                    msg.channel.send('pakyu bladi!');
                 };
-            }
+            };
         case 'limpyo':
             if (msg.author.username != 'JMBot') {
                 msg.channel.messages.fetch()
@@ -76,7 +80,7 @@ Bot.on('message', msg => {
                     });
             };
             break;
-    }
+    };
 
     if(msg.author.username == 'JMBot') {
         if ((msg.content).includes('@everyone Your message will self-destruct in 5 seconds')) {
@@ -95,8 +99,8 @@ Bot.on('message', msg => {
 
                 msg.edit('@everyone Your message will self-destruct in ' + sec + ' ' + sec_lbl + '...')
             }, 1000);
-        }
-    }
+        };
+    };
 
     if (user_ids && user_ids.includes(msg.author.id)) {
         msg.delete();
