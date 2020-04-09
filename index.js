@@ -18,10 +18,10 @@ Bot.on('message', msg => {
     switch (args[0]) {
         case 'bulig':
             msg.channel.send('!sd --> Self destruct your message in 5 seconds.' + 
-                            '!kirom @name --> Silences a user' + 
-                            '!unkirom @name --> Unsilences a user' + 
-                            '!limpyo --> Removes commands' + 
-                            '!limpyo "text" --> Removes commands and recent messages containing "text" (w/o double quotes)' + 
+                            '\n!kirom @name --> Silences a user' + 
+                            '\n!unkirom @name --> Unsilences a user' + 
+                            '\n!limpyo --> Removes commands' + 
+                            '\n!limpyo "text" --> Removes commands and recent messages containing "text" (w/o double quotes)' + 
                             '\nMoi bayot!'
             );
             break;
