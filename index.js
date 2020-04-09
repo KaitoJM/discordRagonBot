@@ -3,6 +3,8 @@ const Bot = new Discord.Client();
 
 const token = 'Njk3MDgyMTk4MzYwMTk1MjAz.Xo1nLA.Z3RMpDVRnyMcBMpdsNOPYYBVSiI';
 const prefix = '!';
+
+const botname = 'JMBot';
 var user_ids = [];
 
 Bot.on('ready', () => {
@@ -18,16 +20,16 @@ Bot.on('message', msg => {
     switch (args[0]) {
         case 'bulig':
             msg.channel.send('!sd --> Self destruct your message in 5 seconds.' + 
-                            '\n!kirom @name --> Silences a user' + 
+                            '\n\n!kirom @name --> Silences a user' + 
                             '\n!unkirom @name --> Unsilences a user' + 
-                            '\n!limpyo --> Removes commands' + 
+                            '\n\n!limpyo --> Removes commands' + 
                             '\n!limpyo "text" --> Removes commands and recent messages containing "text" (w/o double quotes)' + 
-                            '\nMoi bayot!'
+                            '\n\nMoi bayot!'
             );
             break;
 
         case 'sd':
-            if (msg.author.username != 'JMBot') {
+            if (msg.author.username != botname) {
                 msg.channel.send('@everyone Your message will self-destruct in 5 seconds...');
 
                 setTimeout(() => {
@@ -37,7 +39,7 @@ Bot.on('message', msg => {
             break;
 
         case 'kirom':
-            if (msg.author.username != 'JMBot') {
+            if (msg.author.username != botname) {
                 if (args[1] && msg.mentions.users.first().id) {
                     if (!user_ids.includes(msg.mentions.users.first().id)) {
                         user_ids.push(msg.mentions.users.first().id);
@@ -48,7 +50,7 @@ Bot.on('message', msg => {
             break;
 
         case 'unkirom':
-            if (msg.author.username != 'JMBot') {
+            if (msg.author.username != botname) {
                 var look_id = msg.mentions.users.first().id
 
                 if (!save.includes(msg.author.id)) {
@@ -65,7 +67,7 @@ Bot.on('message', msg => {
             break;
 
         case 'limpyo':
-            if (msg.author.username != 'JMBot') {
+            if (msg.author.username != botname) {
                 msg.channel.messages.fetch()
                    .then(function(list) {
                         const messagesToDelete = list.filter(msg => msg.content.includes('!'));
@@ -87,7 +89,7 @@ Bot.on('message', msg => {
             break;
     };
 
-    if (msg.author.username == 'JMBot') {
+    if (msg.author.username == botname) {
         if ((msg.content).includes('@everyone Your message will self-destruct in 5 seconds')) {
             let sec = 5;
 
