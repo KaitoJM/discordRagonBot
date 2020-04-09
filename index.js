@@ -22,9 +22,14 @@ var iras = [
     'em mama',
     'do you really need that?',
     'khwkhwkhwkh',
+    'no time for emotion fags',
+    'jesas',
+    'jesas my internet',
+    'angay gadla, guti emu ulok',
+    'deep truth',
     'die all',
     'intindiha kasi anay an chat George',
-    'Diri kasi for improvement imu criticism honestly',
+    'diri kasi for improvement imu criticism honestly',
     'waray bayag!'
 ];
 
