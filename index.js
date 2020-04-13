@@ -9,14 +9,17 @@ Bot.on('ready', () => {
 })
 
 Bot.on('message', msg => {
-    console.log(msg.author);
     let message_id = msg.id;
 
     let args = msg.content.substring(prefix.length).split(" ");
 
     switch (args[0]) {
         case 'bulig':
-            msg.reply('!sd --> Self destruct your message in 5 seconds. \nMoi bayot!');
+            msg.reply('\n \
+                !sd     --> Self destruct your message in 5 seconds. \n \
+                !limpyo --> Clear all Bots messages. \n \
+                Moi bayot!'
+                );
             break;
 
         case 'sd':
@@ -33,6 +36,16 @@ Bot.on('message', msg => {
             if (msg.author.username != 'JMBot') {
                 msg.reply('pakyu! yu kanat dipit may san!');
             }
+            break;
+
+        case 'test':
+            // const botMessages = msg.channel.messages.filter(msg => msg.author.bot);
+            // msg.channel.bulkDelete(botMessages);
+            // messagesDeleted = botMessages.array().length; // number of messages deleted
+    
+            // // Logging the number of messages deleted on both the channel and console.
+            // msg.channel.send("Deletion of messages successful. Total messages deleted: " + messagesDeleted);
+            // console.log('Deletion of messages successful. Total messages deleted: ' + messagesDeleted)
             break;
     }
 
