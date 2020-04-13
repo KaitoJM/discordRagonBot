@@ -5,6 +5,7 @@ const token = 'Njk3MDgyMTk4MzYwMTk1MjAz.Xo1qyg.r537Z6J87Iee7i6gRi_tuurAYmw';
 const prefix = '!';
 
 const botname = 'JMBot';
+var status_summ = {};
 var kirom_ids = [];
 var iras_id = [];
 var iras = [
@@ -39,6 +40,30 @@ Bot.on('ready', () => {
     console.log('Your Bot is online! Gago!');
 })
 
+bot.on('presenceUpdate', (oldMember, newMember) => {
+    var date_today = getDate();
+    var status = '';
+    var unix_date = '';
+
+    newMember.user.presence.activities.forEach((activity) => {
+        status = activity.state;
+        unix_date = activity.createdTimestamp;
+    });
+
+    if (status_summ[newMember.user.id] == undefined) {
+        status_summ[newMember.user.id] = {
+            'name' : newMember.user.username,
+            'statuses' : {
+                [date_today] : [
+                    status
+                ]
+            }
+        };
+    } else {
+        status_summ[newMember.user.id].statuses[date_today].push(status);
+    };
+});
+
 Bot.on('message', msg => {
     console.log(msg.author);
     let message_id = msg.id;
@@ -55,6 +80,8 @@ Bot.on('message', msg => {
                             '\n!uniras @name --> Removes the user from hell (cant remove self)' + 
                             '\n!view_iras --> View saved annoying messages' + 
                             '\n!add_iras --> Add annoying messages' + 
+                            '\n\n!show_statuses --> Displays the statuses of every user on this channel for today whilst not offline(invisible)' + 
+                            '\n!nl --> Adds 100 newline and dashes(-) (para dri madakop si moi)' + 
                             '\n\nMoi bayot!'
             );
             break;
@@ -165,6 +192,54 @@ Bot.on('message', msg => {
                 };
             };
             break;
+        case 'show_statuses':
+            if (msg.author.username != botname) {
+                var when = '';
+
+                if (args[1] != '') {
+                    if (args[1] == 'tom' || args[1] == 'yest') {
+                        when = args[1];
+                    }
+                }
+
+                var fetched_date = getDate(when);
+                var sum_send = '';
+
+                for (const user in status_summ) {
+                    sum_send += "<@" + user + ">" + '\n';
+
+                    var statuses_txt = [];
+                    for (const status_key in status_summ[user]['statuses'][fetched_date]) {
+                        statuses_txt = status_summ[user]['statuses'][fetched_date][status_key];
+
+                            sum_send += '\t - ' + statuses_txt + '\n';
+                    };
+
+                    if (!statuses_txt.length) {
+                        sum_send += '\t - wara status - \n';
+                    };
+
+                    sum_send += '\n';
+                };
+
+                if (sum_send != '') {
+                    msg.channel.send(sum_send);
+                } else {
+                    msg.channel.send('wara pa nakasave nga status. gago');
+                };
+            };
+            break;
+        case 'nl':
+            if (msg.author.username != botname) {
+                var text = '';
+
+                for (i = 1; i < 100; i++) {
+                    text += '\n-';
+                };
+
+                msg.channel.send(text);
+            };
+            break;
         case 'new_khwkhwkhkwhkwh':
             if (msg.author.username != botname) {
             };
@@ -200,5 +275,23 @@ Bot.on('message', msg => {
         msg.reply(iras[key]);
     };
 });
+
+function getDate(when = '') {
+    var datex = new Date();
+
+    if (when == 'yest') {
+        datex.setDate(datex.getDate() - 1);
+    } else if (when == 'tom') {
+        datex.setDate(datex.getDate() + 1);
+    };
+
+    var dd = String(datex.getDate()).padStart(2, '0');
+    var mm = String(datex.getMonth() + 1).padStart(2, '0'); //January is 0!
+    var yyyy = datex.getFullYear();
+
+    datex = mm + '/' + dd + '/' + yyyy;
+
+    return datex;
+};
 
 Bot.login(token);
