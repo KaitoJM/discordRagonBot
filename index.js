@@ -51,16 +51,22 @@ bot.on('presenceUpdate', (oldMember, newMember) => {
     });
 
     if (status_summ[newMember.user.id] == undefined) {
-        status_summ[newMember.user.id] = {
-            'name' : newMember.user.username,
-            'statuses' : {
-                [date_today] : [
-                    status
-                ]
-            }
+        if (status != '') {
+            status_summ[newMember.user.id] = {
+                'name' : newMember.user.username,
+                'statuses' : {
+                    [date_today] : [
+                        status
+                    ]
+                }
+            };
         };
     } else {
-        status_summ[newMember.user.id].statuses[date_today].push(status);
+        if (status != '') {
+            if (!status_summ[newMember.user.id].statuses[date_today].includes(status)) {
+                status_summ[newMember.user.id].statuses[date_today].push(status);
+            };
+        };
     };
 });
 
