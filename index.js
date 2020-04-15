@@ -174,11 +174,15 @@ Bot.on('message', msg => {
             break;
         case 'iras':
             if (msg.author.username != botname) {
-                if (args[1] && msg.mentions.users && msg.mentions.users.first().id) {
-                    if (!iras_id.includes(msg.mentions.users.first().id)) {
-                        iras_id.push(msg.mentions.users.first().id);
-                        msg.channel.send(args[1] + ' is doomed.');
-                    };
+                if (args[1] && msg.mentions.users.first().id) {
+                    if (msg.mentions.users.first().id == Bot.user.id) {
+                        msg.reply('natuto na ako gago');
+                    } else {
+                        if (!iras_id.includes(msg.mentions.users.first().id)) {
+                            iras_id.push(msg.mentions.users.first().id);
+                            msg.channel.send(args[1] + ' is doomed.');
+                        };
+                    }; 
                 };
             };
             break;
