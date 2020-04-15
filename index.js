@@ -105,10 +105,14 @@ Bot.on('message', msg => {
         case 'kirom':
             if (msg.author.username != botname) {
                 if (args[1] && msg.mentions.users.first().id) {
-                    if (!kirom_ids.includes(msg.mentions.users.first().id)) {
-                        kirom_ids.push(msg.mentions.users.first().id);
-                        msg.channel.send(args[1] + ' is kiromed! Maan!');
-                    };
+                    if (msg.mentions.users.first().id == Bot.user.id) {
+                        msg.reply('walang ganun pakyu!');
+                    } else {
+                        if (!kirom_ids.includes(msg.mentions.users.first().id)) {
+                            kirom_ids.push(msg.mentions.users.first().id);
+                            msg.channel.send(args[1] + ' is kiromed! Maan!');
+                        };
+                    }; 
                 };
             };
             break;
