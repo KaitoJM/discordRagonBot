@@ -88,7 +88,7 @@ Bot.on('message', msg => {
                             '\n!add_iras --> Add annoying messages' + 
                             '\n\n!show_statuses --> Displays the statuses of every user on this channel for today whilst not offline(invisible)' + 
                             '\n!nl --> Adds 100 newline and dashes(-) (para dri madakop si moi)' + 
-                            '\n\nMoi Moi Moi Moi Moi Moi Moi Moi Moi badasdasdasdayot!'
+                            '\n\nMoi Moi Moi Moi Moi Moi Moi Moi Moi bayot!'
             );
             break;
 
